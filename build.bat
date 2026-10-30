@@ -1,6 +1,6 @@
 @echo off
 echo =======================================================
-echo Building Algo-C Compiler (C++17) - Author: 24BDS0427
+echo Building Algo-C Compiler (C++17)
 echo =======================================================
 
 set GXX=C:\msys64\ucrt64\bin\g++.exe

@@ -1,5 +1,5 @@
 // Test 5: Negative Semantic Test Cases
-// Designed to demonstrate compiler diagnostic capabilities for Review 2
+// Demonstrates compiler diagnostic capabilities
 
 int badTypes() {
     int x = 10;

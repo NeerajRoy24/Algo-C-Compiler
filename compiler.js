@@ -1,6 +1,5 @@
 /**
  * Algo-C In-Browser Compiler Engine
- * Author: 24BDS0427 | Course: VL2026270103371 (Compiler Design Lab)
  * Implements: Lexer, Parser, AST, Scoped Symbol Table, Semantic Analyzer,
  *             Optimizer (-O1), LLVM IR Generator, x86-64 CodeGen, and VM.
  */
@@ -1755,7 +1754,6 @@ class AlgoCVM {
 // ==========================================
 const TEST_PRESETS = {
   gcd: `// Test 1: Greatest Common Divisor (Euclidean Algorithm)
-// Directly from Algo-C Review 1 Specification (Slide 3)
 
 int gcd(int a, int b) {
     while (b != 0) {
@@ -1779,7 +1777,6 @@ int main() {
 }`,
 
   while_counter: `// Test 2: While Loop and Basic Blocks
-// Directly from Algo-C Review 1 Specification (Slide 10)
 
 int countUp(int n) {
     int i = 0;
@@ -1820,7 +1817,6 @@ int main() {
 }`,
 
   bubble_sort: `// Test 4: Array Declaration, Subscripts, and Bubble Sort Algorithm
-// Review 2 & Review 3 Core Benchmark
 
 int main() {
     int arr[6];
@@ -1868,7 +1864,7 @@ int main() {
 }`,
 
   semantic_errors: `// Test 5: Negative Semantic Test Cases
-// Designed to demonstrate compiler diagnostic capabilities for Review 2
+// Demonstrates compiler diagnostic error reporting
 
 int badTypes() {
     int x = 10;
