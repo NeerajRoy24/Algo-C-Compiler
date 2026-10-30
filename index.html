@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algo-C Compiler | LLVM Backend & Algorithmic Design Language Studio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <a href="#" class="nav-brand">
+      <div class="brand-icon">AC</div>
+      <div>
+        <span class="brand-name">Algo-C Compiler</span>
+      </div>
+      <span class="brand-badge">LLVM Backend</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#studio" class="nav-link active">Live Studio</a></li>
+      <li><a href="#pipeline" class="nav-link">7-Stage Pipeline</a></li>
+      <li><a href="#reviews" class="nav-link">Lab Reviews</a></li>
+      <li><a href="#spec" class="nav-link">Language Spec</a></li>
+      <li><a href="#benchmarks" class="nav-link">Benchmarks</a></li>
+      <li><a href="#cli" class="nav-link">CLI & Build</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="https://github.com/NeerajRoy24/Algo-C-Compiler" target="_blank" rel="noopener noreferrer" class="btn-github">
+        <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        GitHub Repository
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        Course: VL2026270103371 • Compiler Design Laboratory
+      </div>
+
+      <h1 class="hero-title">
+        The <span class="hero-gradient">Algo-C Compiler</span> &amp; Live Studio
+      </h1>
+
+      <p class="hero-subtitle">
+        An end-to-end algorithmic programming language compiler featuring a 7-stage compilation pipeline:
+        Lexical Tokenization, LLVM-style RTTI AST, Scoped Semantic Type Checking, Peephole &amp; Algebraic Optimizations,
+        authentic LLVM IR emission, x86-64 assembly generation, and in-browser Virtual Machine execution.
+      </p>
+
+      <div class="meta-cards-bar">
+        <div class="meta-card">
+          <span class="meta-card-icon">👨‍💻</span>
+          <div>
+            <div class="meta-card-label">Author</div>
+            <div class="meta-card-val">Neeraj Roy (24BDS0427)</div>
+          </div>
+        </div>
+
+        <div class="meta-card">
+          <span class="meta-card-icon">🏫</span>
+          <div>
+            <div class="meta-card-label">Course ID</div>
+            <div class="meta-card-val">VL2026270103371</div>
+          </div>
+        </div>
+
+        <div class="meta-card">
+          <span class="meta-card-icon">⚡</span>
+          <div>
+            <div class="meta-card-label">Compiler Core</div>
+            <div class="meta-card-val">C++17 / LLVM IR / x86-64</div>
+          </div>
+        </div>
+
+        <div class="meta-card">
+          <span class="meta-card-icon">🌐</span>
+          <div>
+            <div class="meta-card-label">Web Studio</div>
+            <div class="meta-card-val">100% Client-Side Engine</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Compiler Studio Section -->
+  <section id="studio" class="studio-section">
+    <div class="container">
+      <div class="studio-grid">
+        
+        <!-- Left Pane: Editor -->
+        <div class="studio-pane">
+          <div class="pane-header">
+            <div class="pane-title-group">
+              <span class="pane-dot dot-red"></span>
+              <span class="pane-dot dot-yellow"></span>
+              <span class="pane-dot dot-green"></span>
+              <span class="pane-title">source.algoc</span>
+            </div>
+
+            <div class="test-picker">
+              <label for="preset-select" style="font-size: 0.78rem; color: var(--text-dim); font-weight: 600;">Benchmark Presets:</label>
+              <select id="preset-select">
+                <option value="gcd">Test 1: Euclidean GCD</option>
+                <option value="while_counter">Test 2: While Loop Counter</option>
+                <option value="fibonacci">Test 3: Fibonacci Sequence</option>
+                <option value="bubble_sort">Test 4: Bubble Sort on Array</option>
+                <option value="semantic_errors">Test 5: Semantic Diagnostics</option>
+                <option value="optimization">Test 6: Optimization Pass (-O1)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="toolbar-actions">
+            <button id="btn-run" class="btn-action btn-primary" title="Execute program directly in in-browser VM">
+              ▶ Run Program
+            </button>
+            <button id="btn-opt" class="btn-action btn-opt" title="Run constant folding, algebraic simplification, and DCE">
+              ⚡ Optimize (-O1)
+            </button>
+            <button id="btn-llvm" class="btn-action btn-secondary" title="View LLVM IR">
+              ⚙️ LLVM IR
+            </button>
+            <button id="btn-asm" class="btn-action btn-secondary" title="View target assembly">
+              💻 x86-64
+            </button>
+            <button id="btn-symtab" class="btn-action btn-secondary" title="Inspect scoped symbol table">
+              📋 SymTab
+            </button>
+            <button id="btn-ast" class="btn-action btn-secondary" title="Inspect AST hierarchy">
+              🌳 AST
+            </button>
+            <button id="btn-tokens" class="btn-action btn-secondary" title="Inspect Lexer token stream">
+              🔍 Tokens
+            </button>
+            <button id="btn-reset" class="btn-action btn-secondary" title="Reload current preset code">
+              🔄 Reset
+            </button>
+          </div>
+
+          <div class="editor-wrapper">
+            <div id="line-numbers" class="editor-line-numbers"></div>
+            <textarea id="code-editor" class="editor-textarea" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <!-- Right Pane: Inspector / Output -->
+        <div class="studio-pane">
+          <div class="inspector-tabs">
+            <button class="tab-btn active" data-tab="tab-terminal">
+              📟 Terminal
+            </button>
+            <button class="tab-btn" data-tab="tab-llvm">
+              ⚙️ LLVM IR
+            </button>
+            <button class="tab-btn" data-tab="tab-asm">
+              💻 x86-64 Asm
+            </button>
+            <button class="tab-btn" data-tab="tab-optimizer">
+              ⚡ Optimizer
+            </button>
+            <button class="tab-btn" data-tab="tab-symtab">
+              📋 Symbol Table
+            </button>
+            <button class="tab-btn" data-tab="tab-ast">
+              🌳 AST
+            </button>
+            <button class="tab-btn" data-tab="tab-tokens">
+              🔍 Tokens
+            </button>
+            <button class="tab-btn" data-tab="tab-diagnostics">
+              🚨 Diagnostics <span id="diag-badge" class="tab-badge">0</span>
+            </button>
+          </div>
+
+          <div class="inspector-body">
+            
+            <!-- Tab: Terminal -->
+            <div id="tab-terminal" class="tab-panel active">
+              <div class="terminal-view">
+                <div id="terminal-status-header" class="term-header">
+                  <span class="status-badge status-success">Ready</span> Execution Engine: Algo-C Virtual Machine
+                </div>
+                <div id="terminal-content">Click 'Run Program' to execute Algo-C code...</div>
+              </div>
+            </div>
+
+            <!-- Tab: LLVM IR -->
+            <div id="tab-llvm" class="tab-panel">
+              <div style="color: var(--accent-cyan); font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-mono);">
+                ; Authentic LLVM 18 IR (Target: x86_64-pc-windows-msvc)
+              </div>
+              <pre id="llvm-output" class="code-display">Generating LLVM IR...</pre>
+            </div>
+
+            <!-- Tab: x86-64 Assembly -->
+            <div id="tab-asm" class="tab-panel">
+              <div style="color: var(--accent-cyan); font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-mono);">
+                # Generated x86-64 Target Assembly (AT&T Gas Syntax)
+              </div>
+              <pre id="asm-output" class="code-display">Generating x86-64 assembly...</pre>
+            </div>
+
+            <!-- Tab: Optimizer -->
+            <div id="tab-optimizer" class="tab-panel">
+              <div class="opt-stats-grid">
+                <div class="opt-stat-card">
+                  <div id="opt-fold-count" class="opt-stat-num">0</div>
+                  <div class="opt-stat-label">Constant Folds</div>
+                </div>
+                <div class="opt-stat-card">
+                  <div id="opt-algebraic-count" class="opt-stat-num">0</div>
+                  <div class="opt-stat-label">Algebraic Simplifications</div>
+                </div>
+                <div class="opt-stat-card">
+                  <div id="opt-dce-count" class="opt-stat-num">0</div>
+                  <div class="opt-stat-label">Dead Branches Pruned</div>
+                </div>
+                <div class="opt-stat-card">
+                  <div id="opt-total-count" class="opt-stat-num">0</div>
+                  <div class="opt-stat-label">Total Passes Applied</div>
+                </div>
+              </div>
+
+              <div style="color: var(--accent-indigo); font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-mono);">
+                ; Optimized LLVM IR Output (-O1 Transformations)
+              </div>
+              <pre id="opt-code-output" class="code-display">Run optimizer to view output...</pre>
+            </div>
+
+            <!-- Tab: Symbol Table -->
+            <div id="tab-symtab" class="tab-panel">
+              <div id="symtab-container">Inspecting scoped symbol table...</div>
+            </div>
+
+            <!-- Tab: AST -->
+            <div id="tab-ast" class="tab-panel">
+              <div id="ast-container" class="ast-container">Parsing AST...</div>
+            </div>
+
+            <!-- Tab: Tokens -->
+            <div id="tab-tokens" class="tab-panel">
+              <div id="tokens-container">Tokenizing source stream...</div>
+            </div>
+
+            <!-- Tab: Diagnostics -->
+            <div id="tab-diagnostics" class="tab-panel">
+              <div id="diagnostics-container">Running semantic and syntax diagnostics...</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7-Stage Pipeline Architecture -->
+  <section id="pipeline" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Architecture Overview</div>
+        <h2 class="section-title">The 7-Stage Compilation Pipeline</h2>
+        <p class="section-desc">
+          Algo-C translates high-level algorithmic expressions into native execution through seven rigorous phases.
+        </p>
+      </div>
+
+      <div class="pipeline-grid">
+        <div class="pipeline-card">
+          <div class="pipeline-card-top">
+            <span class="phase-number">Phase 1</span>
+            <span class="phase-review">Review 1</span>
+          </div>
+          <h3>Lexical Analysis (Lexer)</h3>
+          <p>Scans input source stream, strips comments and whitespace, and categorizes characters into structured lexical tokens with line and column tracking.</p>
+          <div class="pipeline-tags">
+            <span class="pipeline-tag">Finite Automata</span>
+            <span class="pipeline-tag">Multi-Char Ops</span>
+            <span class="pipeline-tag">Source Loc</span>
+          </div>
+        </div>
+
+        <div class="pipeline-card">
+          <div class="pipeline-card-top">
+            <span class="phase-number">Phase 2</span>
+            <span class="phase-review">Review 1</span>
+          </div>
+          <h3>Syntax Analysis (Parser)</h3>
+          <p>Uses recursive descent parsing with operator precedence climbing to construct an unambiguous parse tree according to Context-Free Grammar.</p>
+          <div class="pipeline-tags">
+            <span class="pipeline-tag">Precedence Climbing</span>
+            <span class="pipeline-tag">CFG Grammar</span>
+            <span class="pipeline-tag">Error Recovery</span>
+          </div>
+        </div>
+
+        <div class="pipeline-card">
+          <div class="pipeline-card-top">
+            <span class="phase-number">Phase 3</span>
+            <span class="phase-review">Review 1</span>
+          </div>
+          <h3>Abstract Syntax Tree (AST)</h3>
+          <p>Emits hierarchical, typed LLVM-style RTTI nodes representing Functions, Prototypes, Blocks, Statements, Arrays, and Expressions.</p>
+          <div class="pipeline-tags">
+            <span class="pipeline-tag">LLVM RTTI</span>
+            <span class="pipeline-tag">std::unique_ptr</span>
+            <span class="pipeline-tag">Visitor Pattern</span>
+          </div>
+        </div>
+
+        <div class="pipeline-card">
+          <div class="pipeline-card-top">
+            <span class="phase-number">Phase 4</span>
+            <span class="phase-review">Review 2</span>
+          </div>
+          <h3>Semantic Analyzer &amp; SymTab</h3>
+          <p>Maintains multi-level lexical scopes, enforces strict type compatibility, verifies array bounds, and conducts definite-return path analysis.</p>
+          <div class="pipeline-tags">
+            <span class="pipeline-tag">Scoped SymTab</span>
+            <span class="pipeline-tag">Type Safety</span>
+            <span class="pipeline-tag">Definite Returns</span>
+          </div>
+        </div>
+
+        <div class="pipeline-card">
+          <div class="pipeline-card-top">
+            <span class="phase-number">Phase 5</span>
+            <span class="phase-review">Review 3</span>
+          </div>
+          <h3>Optimization Engine (-O1)</h3>
+          <p>Applies compile-time constant folding, algebraic simplification (x*1=x, x+0=x, x*0=0), and dead branch elimination.</p>
+          <div class="pipeline-tags">
+            <span class="pipeline-tag">Constant Folding</span>
+            <span class="pipeline-tag">Algebraic Identities</span>
+            <span class="pipeline-tag">Dead Code Elimination</span>
+          </div>
+        </div>
+
+        <div class="pipeline-card">
+          <div class="pipeline-card-top">
+            <span class="phase-number">Phase 6</span>
+            <span class="phase-review">Review 3</span>
+          </div>
+          <h3>LLVM IR &amp; Target CodeGen</h3>
+          <p>Generates SSA-compliant LLVM Intermediate Representation and emits AMD64 / x86-64 target assembly code adhering to calling conventions.</p>
+          <div class="pipeline-tags">
+            <span class="pipeline-tag">LLVM IR 18+</span>
+            <span class="pipeline-tag">x86-64 Gas</span>
+            <span class="pipeline-tag">ABI Prologue/Epilogue</span>
+          </div>
+        </div>
+
+        <div class="pipeline-card">
+          <div class="pipeline-card-top">
+            <span class="phase-number">Phase 7</span>
+            <span class="phase-review">Review 3</span>
+          </div>
+          <h3>Virtual Machine Interpreter</h3>
+          <p>Executes compiled bytecode or AST directly in a stack-based runtime environment with built-in standard I/O library support.</p>
+          <div class="pipeline-tags">
+            <span class="pipeline-tag">Stack VM</span>
+            <span class="pipeline-tag">Runtime IO</span>
+            <span class="pipeline-tag">Instant Execution</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab Reviews Deliverables -->
+  <section id="reviews" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Lab Milestones</div>
+        <h2 class="section-title">Course Review Requirements</h2>
+        <p class="section-desc">
+          Structured deliverables completed for Course VL2026270103371 (Compiler Design Lab).
+        </p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <span class="review-badge rev1-badge">Review 1 Deliverable</span>
+          <h3>Lexer, Grammar &amp; AST</h3>
+          <p>Design of the Algo-C language lexical rules, formal Context-Free Grammar, tokenizer, and LLVM-style RTTI Abstract Syntax Tree.</p>
+          <ul class="review-checklist">
+            <li><span class="check-icon">✓</span> Regular definitions for identifiers, integers, strings &amp; operators</li>
+            <li><span class="check-icon">✓</span> Recursive-descent parser with operator precedence climbing</li>
+            <li><span class="check-icon">✓</span> Custom AST node hierarchy with <code>dump()</code> tree visualizer</li>
+            <li><span class="check-icon">✓</span> <code>--dump-tokens</code> and <code>--dump-ast</code> CLI flags</li>
+          </ul>
+        </div>
+
+        <div class="review-card">
+          <span class="review-badge rev2-badge">Review 2 Deliverable</span>
+          <h3>Symbol Table &amp; Semantic Analysis</h3>
+          <p>Static semantics, lexical scope stacking, type verification system, and flow analysis.</p>
+          <ul class="review-checklist">
+            <li><span class="check-icon">✓</span> Multi-level scoped symbol table (variables, arrays, functions)</li>
+            <li><span class="check-icon">✓</span> Static type compatibility checks on assignments and returns</li>
+            <li><span class="check-icon">✓</span> Redefinition and undeclared identifier diagnostics</li>
+            <li><span class="check-icon">✓</span> Definite-return analysis across all execution branches</li>
+            <li><span class="check-icon">✓</span> <code>--dump-symtab</code> and <code>--check-only</code> flags</li>
+          </ul>
+        </div>
+
+        <div class="review-card">
+          <span class="review-badge rev3-badge">Review 3 Deliverable</span>
+          <h3>Optimization, CodeGen &amp; Execution</h3>
+          <p>Multi-pass optimizer, intermediate representation, native assembly generation, and VM execution.</p>
+          <ul class="review-checklist">
+            <li><span class="check-icon">✓</span> Constant folding &amp; algebraic simplification optimization engine</li>
+            <li><span class="check-icon">✓</span> Dead branch pruning &amp; Dead Code Elimination</li>
+            <li><span class="check-icon">✓</span> Standard LLVM IR generation with SSA temporary registers</li>
+            <li><span class="check-icon">✓</span> x86-64 target assembly emission (AT&amp;T syntax)</li>
+            <li><span class="check-icon">✓</span> Stack Virtual Machine for direct execution (<code>--run</code>)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Language Specification -->
+  <section id="spec" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Reference Manual</div>
+        <h2 class="section-title">Algo-C Language Specification</h2>
+        <p class="section-desc">
+          Grammar syntax, supported primitive types, composite structures, and built-in standard library functions.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        <div class="pipeline-card">
+          <h3>Primitive &amp; Array Types</h3>
+          <p>Algo-C is strongly typed with static type safety enforced at compile time:</p>
+          <ul style="list-style: none; color: var(--text-muted); font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><code>int</code> : 32-bit signed integer</li>
+            <li><code>float</code> : 64-bit IEEE 754 floating-point value</li>
+            <li><code>bool</code> : Boolean logic (<code>true</code> / <code>false</code>)</li>
+            <li><code>void</code> : Empty type used for procedures with no return value</li>
+            <li><code>int arr[N]</code> : Fixed-size contiguous integer array</li>
+          </ul>
+        </div>
+
+        <div class="pipeline-card">
+          <h3>Control Flow Constructs</h3>
+          <p>C-like algorithmic control structures with nested scope support:</p>
+          <ul style="list-style: none; color: var(--text-muted); font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><code>if (condition) { ... } else { ... }</code></li>
+            <li><code>while (condition) { ... }</code></li>
+            <li><code>return expression;</code></li>
+            <li>Block scoping with local variable shadowing</li>
+          </ul>
+        </div>
+
+        <div class="pipeline-card">
+          <h3>Standard I/O Builtins</h3>
+          <p>Built-in runtime procedures linked during IR/VM execution:</p>
+          <ul style="list-style: none; color: var(--text-muted); font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><code>print_int(int val)</code> : Prints integer to stdout</li>
+            <li><code>print_str(string text)</code> : Prints string literal</li>
+            <li><code>println()</code> : Emits a newline character</li>
+            <li><code>print_bool(bool val)</code> : Prints <code>true</code> or <code>false</code></li>
+            <li><code>read_int()</code> : Reads integer from stdin</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benchmark Suite Runner -->
+  <section id="benchmarks" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Automated Verification</div>
+        <h2 class="section-title">Benchmark Test Suites</h2>
+        <p class="section-desc">
+          Six standardized test programs covering all compiler features and diagnostic edge cases.
+        </p>
+      </div>
+
+      <div class="test-suite-runner">
+        <div class="runner-header">
+          <div>
+            <h3 style="font-size: 1.2rem; color: #fff;">Automated Test Suite Runner</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Validates Lexing, Parsing, Semantic Type Checking, and Optimization on all 6 benchmarks.</p>
+          </div>
+          <button id="btn-run-all-tests" class="btn-action btn-primary">
+            🧪 Run All Benchmark Tests
+          </button>
+        </div>
+
+        <div class="test-grid">
+          <div class="test-item">
+            <div class="test-info">
+              <span class="test-name">test1_gcd.algoc</span>
+              <span class="test-desc">Euclid's GCD algorithm &amp; modulo</span>
+            </div>
+            <span id="status-test-1" class="status-badge status-success">PASSED</span>
+          </div>
+
+          <div class="test-item">
+            <div class="test-info">
+              <span class="test-name">test2_while_counter.algoc</span>
+              <span class="test-desc">While loop counter &amp; function calling</span>
+            </div>
+            <span id="status-test-2" class="status-badge status-success">PASSED</span>
+          </div>
+
+          <div class="test-item">
+            <div class="test-info">
+              <span class="test-name">test3_fibonacci.algoc</span>
+              <span class="test-desc">Recursive Fibonacci series up to N=8</span>
+            </div>
+            <span id="status-test-3" class="status-badge status-success">PASSED</span>
+          </div>
+
+          <div class="test-item">
+            <div class="test-info">
+              <span class="test-name">test4_bubble_sort.algoc</span>
+              <span class="test-desc">Array indexing &amp; nested bubble sort</span>
+            </div>
+            <span id="status-test-4" class="status-badge status-success">PASSED</span>
+          </div>
+
+          <div class="test-item">
+            <div class="test-info">
+              <span class="test-name">test5_semantic_errors.algoc</span>
+              <span class="test-desc">Type mismatch, redefinition, missing return</span>
+            </div>
+            <span id="status-test-5" class="status-badge status-success">PASSED (Diagnostics OK)</span>
+          </div>
+
+          <div class="test-item">
+            <div class="test-info">
+              <span class="test-name">test6_optimization.algoc</span>
+              <span class="test-desc">Constant folding, algebraic simplification, DCE</span>
+            </div>
+            <span id="status-test-6" class="status-badge status-success">PASSED</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLI & Local Build Guide -->
+  <section id="cli" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Local Development</div>
+        <h2 class="section-title">CLI Flags &amp; Build Guide</h2>
+        <p class="section-desc">
+          How to clone, compile, and run Algo-C natively on Windows, Linux, or macOS.
+        </p>
+      </div>
+
+      <div class="cli-box">
+        <div class="cli-code">
+          <span class="cli-comment"># 1. Clone the repository</span><br>
+          git clone https://github.com/NeerajRoy24/Algo-C-Compiler.git<br>
+          cd Algo-C-Compiler<br><br>
+          
+          <span class="cli-comment"># 2. Build via GCC / Clang (C++17) or batch script</span><br>
+          .\build.bat  <span class="cli-comment"># On Windows</span><br>
+          <span class="cli-comment"># OR using CMake:</span><br>
+          mkdir build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp; cmake --build .<br><br>
+
+          <span class="cli-comment"># 3. Compiler Command-Line Options</span><br>
+          .\algoc.exe --run tests\test1_gcd.algoc            <span class="cli-comment"># Run algorithm directly via VM</span><br>
+          .\algoc.exe --emit-llvm tests\test1_gcd.algoc      <span class="cli-comment"># Emit authentic LLVM IR</span><br>
+          .\algoc.exe --emit-asm tests\test1_gcd.algoc       <span class="cli-comment"># Emit x86-64 assembly</span><br>
+          .\algoc.exe --optimize tests\test6_optimization.algoc <span class="cli-comment"># Run optimization passes</span><br>
+          .\algoc.exe --dump-symtab tests\test1_gcd.algoc   <span class="cli-comment"># Print scoped symbol table</span><br>
+          .\algoc.exe --dump-ast tests\test1_gcd.algoc      <span class="cli-comment"># Dump AST node tree</span><br>
+          .\algoc.exe --dump-tokens tests\test1_gcd.algoc   <span class="cli-comment"># Dump token stream</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <div class="footer-author">Algo-C Compiler Project</div>
+        <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.25rem;">
+          Course: VL2026270103371 • Compiler Design Laboratory • Author: Neeraj Roy (24BDS0427)
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1.5rem; align-items: center;">
+        <a href="https://github.com/NeerajRoy24/Algo-C-Compiler" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none;">
+          GitHub Repository
+        </a>
+        <a href="#studio" style="color: var(--text-muted); text-decoration: none;">
+          Back to Top ↑
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="compiler.js"></script>
+</body>
+</html>

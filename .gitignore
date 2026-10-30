@@ -1,0 +1,40 @@
+# Binaries and executables
+*.exe
+*.out
+*.app
+*.bin
+algoc
+algoc.exe
+
+# Object files and libraries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+
+# Build directories
+build/
+bin/
+out/
+.cmake/
+CMakeCache.txt
+CMakeFiles/
+Makefile.cmake
+cmake_install.cmake
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary artifacts
+*.ll
+*.s
+*.log
+tmp/

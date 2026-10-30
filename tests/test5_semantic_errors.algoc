@@ -1,0 +1,26 @@
+// Test 5: Negative Semantic Test Cases
+// Designed to demonstrate compiler diagnostic capabilities for Review 2
+
+int badTypes() {
+    int x = 10;
+    bool flag = true;
+    
+    // Semantic Error 1: Type mismatch in assignment
+    x = flag;
+
+    // Semantic Error 2: Undeclared identifier
+    y = 20;
+
+    // Semantic Error 3: Redefinition in same scope
+    int x = 30;
+
+    return x;
+}
+
+int missingReturn(int a) {
+    if (a > 10) {
+        return a;
+    }
+    // Semantic Error 4: Control reaches end of non-void function without return
+}
+

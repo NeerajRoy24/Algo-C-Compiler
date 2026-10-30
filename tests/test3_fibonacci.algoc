@@ -1,0 +1,22 @@
+// Test 3: Fibonacci Series with Recursion and Functions
+
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    print_str("Fibonacci sequence up to N=8: ");
+    int i = 0;
+    while (i <= 8) {
+        int f = fibonacci(i);
+        print_int(f);
+        print_str(" ");
+        i = i + 1;
+    }
+    println();
+    return 0;
+}
+

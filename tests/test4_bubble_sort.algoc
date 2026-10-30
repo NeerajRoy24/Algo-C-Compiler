@@ -1,0 +1,48 @@
+// Test 4: Array Declaration, Subscripts, and Bubble Sort Algorithm
+// Review 2 & Review 3 Core Benchmark
+
+int main() {
+    int arr[6];
+    arr[0] = 64;
+    arr[1] = 25;
+    arr[2] = 12;
+    arr[3] = 22;
+    arr[4] = 11;
+    arr[5] = 90;
+
+    print_str("Original Array: ");
+    int p = 0;
+    while (p < 6) {
+        print_int(arr[p]);
+        print_str(" ");
+        p = p + 1;
+    }
+    println();
+
+    // Bubble sort algorithm
+    int i = 0;
+    while (i < 5) {
+        int j = 0;
+        while (j < 5 - i) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+
+    print_str("Sorted Array:   ");
+    p = 0;
+    while (p < 6) {
+        print_int(arr[p]);
+        print_str(" ");
+        p = p + 1;
+    }
+    println();
+
+    return 0;
+}
+

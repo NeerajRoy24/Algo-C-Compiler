@@ -1,0 +1,24 @@
+// Test 1: Greatest Common Divisor (Euclidean Algorithm)
+// Directly from Algo-C Review 1 Specification (Slide 3)
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a - (a / b) * b;
+        a = t;
+    }
+    return a;
+}
+
+int main() {
+    print_str("Computing GCD of 48 and 18: ");
+    int result = gcd(48, 18);
+    print_int(result);
+    println();
+
+    if (result > 1) {
+        return result;
+    }
+    return 0;
+}
+
