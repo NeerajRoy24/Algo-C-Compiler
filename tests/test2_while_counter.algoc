@@ -1,5 +1,4 @@
 // Test 2: While Loop and Basic Blocks
-// Directly from Algo-C Review 1 Specification (Slide 10)
 
 int countUp(int n) {
     int i = 0;

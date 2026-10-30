@@ -15,18 +15,17 @@
 using namespace algoc;
 
 void printUsage(const char *progName) {
-    std::cout << "Algo-C Compiler (LLVM Backend & Algorithmic Design Language)\n";
-    std::cout << "Author: 24BDS0427 | Course: VL2026270103371 (Compiler Design Lab)\n\n";
+    std::cout << "Algo-C Compiler (LLVM Backend & Algorithmic Design Language)\n\n";
     std::cout << "Usage: " << progName << " [options] <source-file.algoc>\n\n";
     std::cout << "Options:\n";
-    std::cout << "  --dump-tokens     Tokenize source and print token stream (Review 1)\n";
-    std::cout << "  --dump-ast        Parse source and print Abstract Syntax Tree (Review 1)\n";
-    std::cout << "  --dump-symtab     Run semantic analysis and print scoped Symbol Table (Review 2)\n";
-    std::cout << "  --check-only      Run semantic type checks & definite-return analysis (Review 2)\n";
-    std::cout << "  --emit-llvm       Generate authentic LLVM IR (.ll) file (Review 2 / Review 3)\n";
-    std::cout << "  --emit-asm        Generate x86-64 target assembly (.s) file (Review 3)\n";
-    std::cout << "  --optimize, -O1   Run optimization passes (constant folding, DCE, algebraic) (Review 3)\n";
-    std::cout << "  --run             Execute the compiled algorithm directly and display output (Review 3)\n";
+    std::cout << "  --dump-tokens     Tokenize source and print token stream\n";
+    std::cout << "  --dump-ast        Parse source and print Abstract Syntax Tree\n";
+    std::cout << "  --dump-symtab     Run semantic analysis and print scoped Symbol Table\n";
+    std::cout << "  --check-only      Run semantic type checks & definite-return analysis\n";
+    std::cout << "  --emit-llvm       Generate authentic LLVM IR (.ll) file\n";
+    std::cout << "  --emit-asm        Generate x86-64 target assembly (.s) file\n";
+    std::cout << "  --optimize, -O1   Run optimization passes (constant folding, DCE, algebraic)\n";
+    std::cout << "  --run             Execute the compiled algorithm directly and display output\n";
     std::cout << "  -o <filename>     Specify output file path\n";
     std::cout << "  --help, -h        Display this help message\n";
 }
@@ -126,7 +125,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    // 3. Phase 3: Semantic Analysis & Symbol Table (Review 2)
+    // 3. Phase 3: Semantic Analysis & Symbol Table
     SemanticAnalyzer sema;
     bool semaSuccess = sema.analyze(*module);
 
@@ -147,7 +146,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    // 4. Phase 4: Code Optimization (Review 3)
+    // 4. Phase 4: Code Optimization
     if (doOptimize) {
         Optimizer opt;
         auto stats = opt.optimize(*module);

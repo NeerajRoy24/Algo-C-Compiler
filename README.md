@@ -158,14 +158,14 @@ cmake --build . --config Release
 Usage: algoc.exe [options] <source-file.algoc>
 
 Options:
-  --dump-tokens     Tokenize source and print token stream (Review 1)
-  --dump-ast        Parse source and print Abstract Syntax Tree (Review 1)
-  --dump-symtab     Run semantic analysis and print scoped Symbol Table (Review 2)
-  --check-only      Run semantic type checks & definite-return analysis (Review 2)
-  --emit-llvm       Generate authentic LLVM IR (.ll) file (Review 2 / Review 3)
-  --emit-asm        Generate x86-64 target assembly (.s) file (Review 3)
-  --optimize, -O1   Run optimization passes (constant folding, DCE, algebraic) (Review 3)
-  --run             Execute the compiled algorithm directly via VM (Review 3)
+  --dump-tokens     Tokenize source and print token stream
+  --dump-ast        Parse source and print Abstract Syntax Tree
+  --dump-symtab     Run semantic analysis and print scoped Symbol Table
+  --check-only      Run semantic type checks & definite-return analysis
+  --emit-llvm       Generate authentic LLVM IR (.ll) file
+  --emit-asm        Generate x86-64 target assembly (.s) file
+  --optimize, -O1   Run optimization passes (constant folding, DCE, algebraic)
+  --run             Execute the compiled algorithm directly via VM
   -o <filename>     Specify output file path
   --help, -h        Display this help message
 ```
