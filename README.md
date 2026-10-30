@@ -4,17 +4,14 @@
 [![Language](https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://isocpp.org/)
 [![LLVM](https://img.shields.io/badge/LLVM-18%2B%20IR-9333ea?style=for-the-badge&logo=llvm&logoColor=white)](https://llvm.org/)
 [![Target](https://img.shields.io/badge/Target-x86--64%20Gas-10b981?style=for-the-badge)](https://en.wikipedia.org/wiki/X86-64)
-[![Course](https://img.shields.io/badge/Course-VL2026270103371-f59e0b?style=for-the-badge)](https://github.com/NeerajRoy24/Algo-C-Compiler)
 
 > **Live Interactive Studio**: [https://neerajroy24.github.io/Algo-C-Compiler/](https://neerajroy24.github.io/Algo-C-Compiler/)  
-> **Course**: VL2026270103371 (Compiler Design Laboratory)  
-> **Author**: Neeraj Roy (24BDS0427)
 
 ---
 
 ## 📖 Project Overview
 
-**Algo-C** is a high-performance algorithmic programming language and compiler implementing an end-to-end 7-stage compilation pipeline. Developed as part of the Compiler Design Laboratory curriculum, it features a complete lexical analyzer, recursive descent parser with operator precedence climbing, typed LLVM-style RTTI Abstract Syntax Tree, scoped semantic analysis, multi-pass optimization engine (-O1), authentic LLVM IR generation, x86-64 target assembly emission, and a stack-based virtual machine interpreter.
+**Algo-C** is a high-performance algorithmic programming language and compiler implementing an end-to-end 7-stage compilation pipeline. It features a complete lexical analyzer, recursive descent parser with operator precedence climbing, typed LLVM-style RTTI Abstract Syntax Tree, scoped semantic analysis, multi-pass optimization engine (-O1), authentic LLVM IR generation, x86-64 target assembly emission, and a stack-based virtual machine interpreter.
 
 The project includes an **interactive in-browser web studio** hosted on GitHub Pages that allows anyone to write, compile, inspect, and execute Algo-C programs directly without installing any local compiler dependencies.
 
@@ -83,9 +80,9 @@ Visit the live demo directly in your browser:
 
 ---
 
-## 📋 Course Review Milestones & Deliverables
+## 📋 Key Compiler Capabilities
 
-### Review 1: Front-End Core (Lexer, Parser & AST)
+### Front-End Core (Lexer, Parser & AST)
 - [x] Context-Free Grammar (CFG) specification for algorithmic design syntax.
 - [x] Multi-character token handling (`==`, `!=`, `<=`, `>=`, `&&`, `||`).
 - [x] Source location tracking (line numbers and column numbers).
@@ -93,14 +90,14 @@ Visit the live demo directly in your browser:
 - [x] Abstract Syntax Tree with LLVM-style Runtime Type Information (RTTI) and `dump()` method.
 - [x] Command-line flags: `--dump-tokens` and `--dump-ast`.
 
-### Review 2: Middle-End Analysis (Semantic Checks & Symbol Table)
+### Middle-End Analysis (Semantic Checks & Symbol Table)
 - [x] Multi-level scoped Symbol Table supporting function, variable, and fixed-size array declarations.
 - [x] Strict compile-time type checking for assignments, conditions, arithmetic, and returns.
 - [x] Diagnostic error reporting with line/column markers for undeclared identifiers and redefinitions.
 - [x] Definite-return path analysis verifying that non-void functions always return a value.
 - [x] Command-line flags: `--dump-symtab` and `--check-only`.
 
-### Review 3: Back-End Synthesis (Optimizer, LLVM IR, Assembly & VM)
+### Back-End Synthesis (Optimizer, LLVM IR, Assembly & VM)
 - [x] Multi-pass optimization engine (`-O1`, `--optimize`):
   - Constant folding on numeric and boolean literals.
   - Algebraic simplification: `x + 0 -> x`, `x - 0 -> x`, `x * 1 -> x`, `x * 0 -> 0`.
@@ -232,7 +229,7 @@ Options:
 
 ---
 
-## 📜 License & Acknowledgments
+## 📜 License
 
-This project is submitted for course **VL2026270103371 (Compiler Design Laboratory)** by **Neeraj Roy (Registration No: 24BDS0427)**.  
 Licensed under the [MIT License](LICENSE).
+

@@ -24,7 +24,6 @@
     <ul class="nav-links">
       <li><a href="#studio" class="nav-link active">Live Studio</a></li>
       <li><a href="#pipeline" class="nav-link">7-Stage Pipeline</a></li>
-      <li><a href="#reviews" class="nav-link">Lab Reviews</a></li>
       <li><a href="#spec" class="nav-link">Language Spec</a></li>
       <li><a href="#benchmarks" class="nav-link">Benchmarks</a></li>
       <li><a href="#cli" class="nav-link">CLI & Build</a></li>
@@ -43,11 +42,6 @@
   <!-- Hero Section -->
   <header class="hero">
     <div class="container">
-      <div class="hero-pill">
-        <span class="hero-pill-dot"></span>
-        Course: VL2026270103371 • Compiler Design Laboratory
-      </div>
-
       <h1 class="hero-title">
         The <span class="hero-gradient">Algo-C Compiler</span> &amp; Live Studio
       </h1>
@@ -60,26 +54,26 @@
 
       <div class="meta-cards-bar">
         <div class="meta-card">
-          <span class="meta-card-icon">👨‍💻</span>
-          <div>
-            <div class="meta-card-label">Author</div>
-            <div class="meta-card-val">Neeraj Roy (24BDS0427)</div>
-          </div>
-        </div>
-
-        <div class="meta-card">
-          <span class="meta-card-icon">🏫</span>
-          <div>
-            <div class="meta-card-label">Course ID</div>
-            <div class="meta-card-val">VL2026270103371</div>
-          </div>
-        </div>
-
-        <div class="meta-card">
           <span class="meta-card-icon">⚡</span>
           <div>
-            <div class="meta-card-label">Compiler Core</div>
-            <div class="meta-card-val">C++17 / LLVM IR / x86-64</div>
+            <div class="meta-card-label">Pipeline</div>
+            <div class="meta-card-val">7-Stage Engine</div>
+          </div>
+        </div>
+
+        <div class="meta-card">
+          <span class="meta-card-icon">🎯</span>
+          <div>
+            <div class="meta-card-label">Backend</div>
+            <div class="meta-card-val">LLVM IR &amp; x86-64</div>
+          </div>
+        </div>
+
+        <div class="meta-card">
+          <span class="meta-card-icon">🚀</span>
+          <div>
+            <div class="meta-card-label">Optimizer</div>
+            <div class="meta-card-val">-O1 Multi-Pass</div>
           </div>
         </div>
 
@@ -281,7 +275,6 @@
         <div class="pipeline-card">
           <div class="pipeline-card-top">
             <span class="phase-number">Phase 1</span>
-            <span class="phase-review">Review 1</span>
           </div>
           <h3>Lexical Analysis (Lexer)</h3>
           <p>Scans input source stream, strips comments and whitespace, and categorizes characters into structured lexical tokens with line and column tracking.</p>
@@ -295,7 +288,6 @@
         <div class="pipeline-card">
           <div class="pipeline-card-top">
             <span class="phase-number">Phase 2</span>
-            <span class="phase-review">Review 1</span>
           </div>
           <h3>Syntax Analysis (Parser)</h3>
           <p>Uses recursive descent parsing with operator precedence climbing to construct an unambiguous parse tree according to Context-Free Grammar.</p>
@@ -309,7 +301,6 @@
         <div class="pipeline-card">
           <div class="pipeline-card-top">
             <span class="phase-number">Phase 3</span>
-            <span class="phase-review">Review 1</span>
           </div>
           <h3>Abstract Syntax Tree (AST)</h3>
           <p>Emits hierarchical, typed LLVM-style RTTI nodes representing Functions, Prototypes, Blocks, Statements, Arrays, and Expressions.</p>
@@ -323,7 +314,6 @@
         <div class="pipeline-card">
           <div class="pipeline-card-top">
             <span class="phase-number">Phase 4</span>
-            <span class="phase-review">Review 2</span>
           </div>
           <h3>Semantic Analyzer &amp; SymTab</h3>
           <p>Maintains multi-level lexical scopes, enforces strict type compatibility, verifies array bounds, and conducts definite-return path analysis.</p>
@@ -337,7 +327,6 @@
         <div class="pipeline-card">
           <div class="pipeline-card-top">
             <span class="phase-number">Phase 5</span>
-            <span class="phase-review">Review 3</span>
           </div>
           <h3>Optimization Engine (-O1)</h3>
           <p>Applies compile-time constant folding, algebraic simplification (x*1=x, x+0=x, x*0=0), and dead branch elimination.</p>
@@ -351,7 +340,6 @@
         <div class="pipeline-card">
           <div class="pipeline-card-top">
             <span class="phase-number">Phase 6</span>
-            <span class="phase-review">Review 3</span>
           </div>
           <h3>LLVM IR &amp; Target CodeGen</h3>
           <p>Generates SSA-compliant LLVM Intermediate Representation and emits AMD64 / x86-64 target assembly code adhering to calling conventions.</p>
@@ -365,7 +353,6 @@
         <div class="pipeline-card">
           <div class="pipeline-card-top">
             <span class="phase-number">Phase 7</span>
-            <span class="phase-review">Review 3</span>
           </div>
           <h3>Virtual Machine Interpreter</h3>
           <p>Executes compiled bytecode or AST directly in a stack-based runtime environment with built-in standard I/O library support.</p>
@@ -374,59 +361,6 @@
             <span class="pipeline-tag">Runtime IO</span>
             <span class="pipeline-tag">Instant Execution</span>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lab Reviews Deliverables -->
-  <section id="reviews" class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Lab Milestones</div>
-        <h2 class="section-title">Course Review Requirements</h2>
-        <p class="section-desc">
-          Structured deliverables completed for Course VL2026270103371 (Compiler Design Lab).
-        </p>
-      </div>
-
-      <div class="reviews-grid">
-        <div class="review-card">
-          <span class="review-badge rev1-badge">Review 1 Deliverable</span>
-          <h3>Lexer, Grammar &amp; AST</h3>
-          <p>Design of the Algo-C language lexical rules, formal Context-Free Grammar, tokenizer, and LLVM-style RTTI Abstract Syntax Tree.</p>
-          <ul class="review-checklist">
-            <li><span class="check-icon">✓</span> Regular definitions for identifiers, integers, strings &amp; operators</li>
-            <li><span class="check-icon">✓</span> Recursive-descent parser with operator precedence climbing</li>
-            <li><span class="check-icon">✓</span> Custom AST node hierarchy with <code>dump()</code> tree visualizer</li>
-            <li><span class="check-icon">✓</span> <code>--dump-tokens</code> and <code>--dump-ast</code> CLI flags</li>
-          </ul>
-        </div>
-
-        <div class="review-card">
-          <span class="review-badge rev2-badge">Review 2 Deliverable</span>
-          <h3>Symbol Table &amp; Semantic Analysis</h3>
-          <p>Static semantics, lexical scope stacking, type verification system, and flow analysis.</p>
-          <ul class="review-checklist">
-            <li><span class="check-icon">✓</span> Multi-level scoped symbol table (variables, arrays, functions)</li>
-            <li><span class="check-icon">✓</span> Static type compatibility checks on assignments and returns</li>
-            <li><span class="check-icon">✓</span> Redefinition and undeclared identifier diagnostics</li>
-            <li><span class="check-icon">✓</span> Definite-return analysis across all execution branches</li>
-            <li><span class="check-icon">✓</span> <code>--dump-symtab</code> and <code>--check-only</code> flags</li>
-          </ul>
-        </div>
-
-        <div class="review-card">
-          <span class="review-badge rev3-badge">Review 3 Deliverable</span>
-          <h3>Optimization, CodeGen &amp; Execution</h3>
-          <p>Multi-pass optimizer, intermediate representation, native assembly generation, and VM execution.</p>
-          <ul class="review-checklist">
-            <li><span class="check-icon">✓</span> Constant folding &amp; algebraic simplification optimization engine</li>
-            <li><span class="check-icon">✓</span> Dead branch pruning &amp; Dead Code Elimination</li>
-            <li><span class="check-icon">✓</span> Standard LLVM IR generation with SSA temporary registers</li>
-            <li><span class="check-icon">✓</span> x86-64 target assembly emission (AT&amp;T syntax)</li>
-            <li><span class="check-icon">✓</span> Stack Virtual Machine for direct execution (<code>--run</code>)</li>
-          </ul>
         </div>
       </div>
     </div>
@@ -598,7 +532,7 @@
       <div>
         <div class="footer-author">Algo-C Compiler Project</div>
         <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.25rem;">
-          Course: VL2026270103371 • Compiler Design Laboratory • Author: Neeraj Roy (24BDS0427)
+          Full-featured algorithmic language compiler with LLVM backend, multi-pass optimization &amp; interactive virtual machine.
         </div>
       </div>
 
@@ -616,3 +550,4 @@
   <script src="compiler.js"></script>
 </body>
 </html>
+
